@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     // Global Selection State
-    // We'll treat all images as one big list for drag selection, 
-    // but keep track of them by car section for "Download Selected"
-    let allGalleryItems = []; // Array of { element, data, index, carIndex }
+    let allGalleryItems = [];
     const selectedImages = {}; // { [carIndex]: Set(imgIndices) }
+
+    // Download Format State
+    let downloadFormat = 'jpg'; // 'jpg' or 'webp'
 
     // Drag Selection Variables
     let isDragging = false;
@@ -65,10 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const controls = document.createElement('div');
         controls.className = 'controls-bar';
 
+        // Format Selection
+        const formatSelect = document.createElement('select');
+        formatSelect.className = 'format-select';
+        formatSelect.innerHTML = `
+            <option value="jpg">Format: Optimized JPG</option>
+            <option value="webp">Format: Efficient WebP</option>
+            <option value="original">Format: Original (Full Res)</option>
+        `;
+        formatSelect.onchange = (e) => {
+            downloadFormat = e.target.value;
+        };
+
         const downloadAllBtn = document.createElement('button');
         downloadAllBtn.className = 'btn btn-primary';
         downloadAllBtn.textContent = 'Download All';
-        downloadAllBtn.onclick = () => downloadImages(car, car.images, `${car.brand}_${car.model}_All.zip`);
+        downloadAllBtn.onclick = () => downloadImages(car, car.images, `${car.brand}_${car.model}_All_${downloadFormat}.zip`);
 
         const downloadSelectedBtn = document.createElement('button');
         downloadSelectedBtn.className = 'btn btn-secondary';
@@ -78,9 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadSelectedBtn.onclick = () => {
             const selectedIndices = Array.from(selectedImages[carIndex]);
             const selectedImgs = selectedIndices.map(i => car.images[i]);
-            downloadImages(car, selectedImgs, `${car.brand}_${car.model}_Selected.zip`);
+            downloadImages(car, selectedImgs, `${car.brand}_${car.model}_Selected_${downloadFormat}.zip`);
         };
 
+        controls.appendChild(formatSelect);
         controls.appendChild(downloadAllBtn);
         controls.appendChild(downloadSelectedBtn);
 
@@ -95,21 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
             item.dataset.imgIndex = imgIndex;
 
             const folder = car.brand === 'Chery' ? 'Chery' : 'DFSK';
-            const imgPath = `${folder}/${img.filename}`;
 
-            // Selection Checkbox (Custom Overlay)
+            // Use WebP thumbnail for grid
+            const filenameNoExt = img.filename.substring(0, img.filename.lastIndexOf('.'));
+            const thumbPath = `${folder}/thumbnails/${filenameNoExt}.webp`;
+
+            // Selection Checkbox (Visual Overlay)
             const overlay = document.createElement('div');
             overlay.className = 'selection-overlay';
 
-            // We use the overlay as the visual checkbox. 
-            // The click logic resides on the item itself for better UX.
-
             // Image content
             const imgEl = document.createElement('img');
-            imgEl.src = imgPath;
+            imgEl.src = thumbPath; // Load thumbnail
             imgEl.alt = img.caption;
             imgEl.className = 'gallery-image';
             imgEl.loading = 'lazy';
+
+            // Fallback for thumbnail error (if script hasn't run or fail)
+            imgEl.onerror = () => {
+                imgEl.src = `${folder}/${img.filename}`;
+            };
 
             const caption = document.createElement('div');
             caption.className = 'gallery-caption';
@@ -121,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Interaction Logic
             item.addEventListener('click', (e) => {
-                // If any item is selected globally, or if we clicked the checkbox overlay directly
                 const totalSelected = getTotalSelectedCount();
                 const isOverlayClick = e.target.closest('.selection-overlay');
 
@@ -182,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedImages[carIndex].delete(imgIndex);
             element.classList.remove('selected');
         });
-        // Update all buttons
         for (const key in selectedImages) {
             updateDownloadSelectedBtn(key);
         }
@@ -190,8 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Drag Selection Logic
     document.addEventListener('mousedown', (e) => {
-        // Start drag only if left click and not on specific interactive elements
-        if (e.button !== 0 || e.target.closest('.btn') || e.target.closest('.lightbox')) return;
+        if (e.button !== 0 || e.target.closest('.btn') || e.target.closest('.lightbox') || e.target.closest('select')) return;
 
         isDragging = true;
         startX = e.clientX;
@@ -203,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
         selectionBox.style.height = '0px';
         selectionBox.style.display = 'block';
 
-        // Re-calculate rects in case of scroll/layout changes
         allGalleryItems.forEach(item => {
             item.rect = item.element.getBoundingClientRect();
         });
@@ -225,7 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
         selectionBox.style.width = width + 'px';
         selectionBox.style.height = height + 'px';
 
-        // Check intersections
         allGalleryItems.forEach(item => {
             const itemRect = item.rect;
             const intersect = !(itemRect.right < minX ||
@@ -234,7 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemRect.top > minY + height);
 
             if (intersect) {
-                // Determine logic: add to selection
                 if (!selectedImages[item.carIndex].has(item.imgIndex)) {
                     selectedImages[item.carIndex].add(item.imgIndex);
                     item.element.classList.add('selected');
@@ -251,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (lightbox.classList.contains('active')) {
@@ -260,14 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearAllSelections();
             }
         }
-        // Lightbox nav
         if (lightbox.classList.contains('active')) {
             if (e.key === 'ArrowRight') showNext();
             if (e.key === 'ArrowLeft') showPrev();
         }
     });
 
-    // Download Logic (same as before)
     async function downloadImages(car, images, zipFilename) {
         if (!images || images.length === 0) return;
 
@@ -276,11 +286,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const promises = images.map(async (img) => {
             try {
-                const response = await fetch(`${folderName}/${img.filename}`);
+                let filename = img.filename;
+                let path = '';
+
+                // Determine path based on format
+                if (downloadFormat === 'webp') {
+                    filename = filename.substring(0, filename.lastIndexOf('.')) + '.webp';
+                    path = `${folderName}/full/${filename}`;
+                } else if (downloadFormat === 'jpg') {
+                    // Optimized JPG
+                    path = `${folderName}/full/${filename}`;
+                } else {
+                    // Original (Full Res) - residing in the root folder
+                    path = `${folderName}/${filename}`;
+                }
+
+                const response = await fetch(path);
+                if (!response.ok) throw new Error('Network response was not ok');
                 const blob = await response.blob();
-                zip.file(img.filename, blob);
+                zip.file(filename, blob);
             } catch (error) {
                 console.error(`Failed to load ${img.filename}`, error);
+                // Fallback to original if optimized missing?
             }
         });
 
@@ -297,9 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Lightbox Functions
     function openLightbox(images, index, folder) {
-        currentImages = images.map(img => `${folder}/${img.filename}`);
+        // Use optimized WebP for lightbox
+        currentImages = images.map(img => {
+            const filenameNoExt = img.filename.substring(0, img.filename.lastIndexOf('.'));
+            return `${folder}/full/${filenameNoExt}.webp`;
+        });
         currentIndex = index;
         updateLightboxImage();
         lightbox.classList.add('active');
@@ -325,7 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLightboxImage();
     }
 
-    // Listeners
     closeBtn.addEventListener('click', closeLightbox);
     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
