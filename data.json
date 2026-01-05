@@ -1,0 +1,270 @@
+[
+    {
+        "brand": "Chery",
+        "model": "Tiggo 8 Pro",
+        "year": 2022,
+        "version": "RHD",
+        "registration": 2023,
+        "mileage": "~10,000 KM",
+        "images": [
+            {
+                "filename": "CheryTiggo8ProFront.jpg",
+                "caption": "Front view showing the bold grille"
+            },
+            {
+                "filename": "CheryTiggo8ProFront1.jpg",
+                "caption": "Front angle view"
+            },
+            {
+                "filename": "CheryTiggo8ProFront2.jpg",
+                "caption": "Front parking view"
+            },
+            {
+                "filename": "CheryTiggo8ProFront3.jpg",
+                "caption": "Headlight detail"
+            },
+            {
+                "filename": "CheryTiggo8ProFront4.jpg",
+                "caption": "Front bumper detail"
+            },
+            {
+                "filename": "CheryTiggo8ProFront5.jpg",
+                "caption": "Front dynamic shot"
+            },
+            {
+                "filename": "CheryTiggo8ProFront6.jpg",
+                "caption": "Front close-up"
+            },
+            {
+                "filename": "CheryTiggo8ProFront7.jpg",
+                "caption": "Front wide angle"
+            },
+            {
+                "filename": "CheryTiggo8ProFront8.jpg",
+                "caption": "Front view sunlight"
+            },
+            {
+                "filename": "CheryTiggo8ProRear.jpg",
+                "caption": "Rear view"
+            },
+            {
+                "filename": "CheryTiggo8ProRear1.jpg",
+                "caption": "Rear angle"
+            },
+            {
+                "filename": "CheryTiggo8ProRear2.jpg",
+                "caption": "Rear taillight detail"
+            },
+            {
+                "filename": "CheryTiggo8ProRear3.jpg",
+                "caption": "Rear bumper detail"
+            },
+            {
+                "filename": "CheryTiggo8ProSideView.jpg",
+                "caption": "Side profile"
+            },
+            {
+                "filename": "CheryTiggo8ProSideView1.jpg",
+                "caption": "Side view left"
+            },
+            {
+                "filename": "CheryTiggo8ProSideView2.jpg",
+                "caption": "Side view right"
+            },
+            {
+                "filename": "CheryTiggo8ProSideView3.jpg",
+                "caption": "Side door detail"
+            },
+            {
+                "filename": "CheryTiggo8ProInterior.jpg",
+                "caption": "Full interior view"
+            },
+            {
+                "filename": "CheryTiggo8ProInterior1.jpg",
+                "caption": "Interior seating"
+            },
+            {
+                "filename": "CheryTiggo8ProInterior2.jpg",
+                "caption": "Rear seats"
+            },
+            {
+                "filename": "CheryTiggo8ProInterior3.jpg",
+                "caption": "Interior spaciousness"
+            },
+            {
+                "filename": "CheryTiggo8ProDashboard.jpg",
+                "caption": "Dashboard overview"
+            },
+            {
+                "filename": "CheryTiggo8ProDashboard1.jpg",
+                "caption": "Digital instrument cluster"
+            },
+            {
+                "filename": "CheryTiggo8ProInteriorDashboard.jpg",
+                "caption": "central console"
+            },
+            {
+                "filename": "CheryTiggo8ProInteriorDashboard1.jpg",
+                "caption": "Infotainment screen"
+            },
+            {
+                "filename": "CheryTiggo8ProDashboardView.jpg",
+                "caption": "Driver perspective"
+            },
+            {
+                "filename": "CheryTiggo8ProSteeringWheel.jpg",
+                "caption": "Multi-function steering wheel"
+            },
+            {
+                "filename": "CheryTiggo8ProWheel.jpg",
+                "caption": "Alloy wheel detail"
+            },
+            {
+                "filename": "CheryTiggo8ProWheel1.jpg",
+                "caption": "Tire tread"
+            },
+            {
+                "filename": "CheryTiggo8ProEngine.jpg",
+                "caption": "Engine bay"
+            },
+            {
+                "filename": "CheryTiggo8ProEngine1.jpg",
+                "caption": "Engine close-up"
+            },
+            {
+                "filename": "CheryTiggo8ProMirror.jpg",
+                "caption": "Side mirror"
+            },
+            {
+                "filename": "CheryTiggo8ProInteriorDoorOpen.jpg",
+                "caption": "Door panel"
+            },
+            {
+                "filename": "CheryTiggo8ProTrunkOpen.jpg",
+                "caption": "Trunk space"
+            },
+            {
+                "filename": "CheryTiggo8ProRearOpen.jpg",
+                "caption": "Rear hatch open"
+            }
+        ]
+    },
+    {
+        "brand": "DFSK",
+        "model": "Glory 580 i-auto",
+        "year": 2022,
+        "version": "RHD",
+        "registration": 2022,
+        "mileage": "~35,000 KM",
+        "images": [
+            {
+                "filename": "DfskGlory580Front.jpg",
+                "caption": "Front view"
+            },
+            {
+                "filename": "DfskGlory580Front1.jpg",
+                "caption": "Front angle"
+            },
+            {
+                "filename": "DfskGlory580FrontView.jpg",
+                "caption": "Front grille detail"
+            },
+            {
+                "filename": "DfskGlory580Rear.jpg",
+                "caption": "Rear view"
+            },
+            {
+                "filename": "DfskGlory580Rear1.jpg",
+                "caption": "Rear angle"
+            },
+            {
+                "filename": "DfskGlory580RearView.jpg",
+                "caption": "Rear taillights"
+            },
+            {
+                "filename": "DfskGlory580Side.jpg",
+                "caption": "Side profile"
+            },
+            {
+                "filename": "DfskGlory580Side1.jpg",
+                "caption": "Side view left"
+            },
+            {
+                "filename": "DfskGlory580Side2.jpg",
+                "caption": "Side view right"
+            },
+            {
+                "filename": "DfskGlory580SideView.jpg",
+                "caption": "Full side view"
+            },
+            {
+                "filename": "DfskGlory580Interior.jpg",
+                "caption": "Interior overview"
+            },
+            {
+                "filename": "DfskGlory580Interior1.jpg",
+                "caption": "Front seats"
+            },
+            {
+                "filename": "DfskGlory580Interior2.jpg",
+                "caption": "Rear seats"
+            },
+            {
+                "filename": "DfskGlory580Interior3.jpg",
+                "caption": "Third row seats"
+            },
+            {
+                "filename": "DfskGlory580Interior4.jpg",
+                "caption": "Interior finish"
+            },
+            {
+                "filename": "DfskGlory580Interior5.jpg",
+                "caption": "Door panel"
+            },
+            {
+                "filename": "DfskGlory580Interior6.jpg",
+                "caption": "Cabin view"
+            },
+            {
+                "filename": "DfskGlory580Dashboard.jpg",
+                "caption": "Dashboard layout"
+            },
+            {
+                "filename": "DfskGlory580Console.jpg",
+                "caption": "Center console"
+            },
+            {
+                "filename": "DfskGlory580SteeringWheel.jpg",
+                "caption": "Steering wheel"
+            },
+            {
+                "filename": "DfskGlory580Wheel.jpg",
+                "caption": "Alloy wheel"
+            },
+            {
+                "filename": "DfskGlory580SideMirror.jpg",
+                "caption": "Side mirror"
+            },
+            {
+                "filename": "DfskGlory580RearDoor.jpg",
+                "caption": "Rear door open"
+            },
+            {
+                "filename": "DfskGlory580InteriorRoof.jpg",
+                "caption": "Sunroof view"
+            },
+            {
+                "filename": "DfskGlory580InteriorRoof1.jpg",
+                "caption": "Roof lining"
+            },
+            {
+                "filename": "DfskGlory580InteriorView.jpg",
+                "caption": "Driver seat view"
+            },
+            {
+                "filename": "DfskGlory580Dashboard1.jpg",
+                "caption": "Dashboard close-up"
+            }
+        ]
+    }
+]
